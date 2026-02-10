@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+{% block content %}
+  <div class="pv-card p-4">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div>
+        <h2 class="h4 mb-1">Dashboard</h2>
+        <p class="text-white-50 small mb-0">Mock “saved images” (3×3 grid).</p>
+      </div>
+      <div class="text-white-50 small">
+        MFA: {% if current_user.mfa_enabled %}<span class="text-success fw-semibold">enabled</span>{% else %}<span class="text-warning fw-semibold">disabled</span>{% endif %}
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-3 mt-2 pv-grid">
+      {% for img in images %}
+        <div class="col">
+          <img src="{{ url_for('static', filename=img) }}" alt="Mock image {{ loop.index }}">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
