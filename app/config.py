@@ -7,14 +7,14 @@ class Config:
     def __init__(self):
         self.SECRET_KEY = os.getenv("FLASK_SECRET_KEY", "dev-secret-change-me")
 
-        self.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            os.getenv("FLASK_DB_DIR", ""),  # allow override if desired
-            "app.db",
-        )
         # Put DB inside instance/ by default
-        # Flask will resolve relative paths to instance folder when instance_relative_config=True
-        if "FLASK_DB_DIR" not in os.environ:
-            self.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join("instance", "app.db")
+        db_dir = os.getenv("FLASK_DB_DIR", None)
+        if db_dir:
+            db_path = os.path.join(db_dir, "app.db")
+        else:
+            db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "instance", "app.db")
+        
+        self.SQLALCHEMY_DATABASE_URI = "sqlite:///" + db_path
 
         self.SQLALCHEMY_TRACK_MODIFICATIONS = False
 
