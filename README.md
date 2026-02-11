@@ -4,6 +4,7 @@ A small demo webapp (Pinterest-ish grid) to showcase:
 - Register / Login / Forgot password
 - Password change
 - MFA (TOTP / Google Authenticator)
+- **Multilingual Support (English & Catalan)** 🌐
 - Dashboard + logout
 
 ## Quick start
@@ -25,6 +26,37 @@ Then open: http://127.0.0.1:5000
 
 The SQLite database will be created automatically in `instance/app.db`.
 
+## Makefile
+
+The project includes a `Makefile` with convenient targets. By default the Makefile will use the project's virtual environment Python at `.venv/bin/python` if it exists, otherwise it falls back to the system `python`.
+
+Common targets:
+
+- Compile translations:
+
+```bash
+make compile-language
+```
+
+- Remove compiled Python artefacts (`__pycache__`, `.pyc`):
+
+```bash
+make clean
+```
+
+- Serve the application (runs `python run.py`):
+
+```bash
+make serve
+```
+
+You can override the Python binary used by the Makefile with the `PYTHON` environment variable, for example:
+
+```bash
+PYTHON=python3.11 make compile-language
+```
+
+
 ## Email (Forgot Password)
 
 This project includes a **placeholder** mail configuration. If you don't configure mail,
@@ -34,8 +66,21 @@ To configure real SMTP, copy `.env.example` to `.env` and edit values.
 
 > Tip: For tutorials, you can keep SMTP disabled and just use the console link.
 
+## Multilingual Support 🌐
+
+The application supports **English** and **Catalan**. Users can switch languages using the globe icon (🌐) in the navigation bar.
+
+- All UI strings are translatable
+- Language preference is stored in the user session
+- Browser language is used as fallback
+- Full Catalan translation included
+
+For more details on adding translations or supporting new languages, see [MULTILINGUAL.md](MULTILINGUAL.md).
+
 ## Notes
 
 - Passwords are hashed with Werkzeug.
 - MFA uses TOTP (RFC 6238) via `pyotp`.
 - CSRF protection is enabled via Flask-WTF.
+- Translations managed with Flask-Babel.
+

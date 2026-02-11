@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, session, current_app
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_babel import gettext as _
 from sqlalchemy import or_
 
 from . import db
@@ -20,6 +21,14 @@ def home():
         return redirect(url_for("auth.dashboard"))
     return redirect(url_for("auth.login"))
 
+@auth_bp.route("/set-locale/<locale>")
+def set_locale(locale):
+    """Set user's language preference"""
+    if locale in ['en', 'ca']:
+        session.permanent = True
+        session['locale'] = locale
+    return redirect(request.referrer or url_for("auth.home"))
+
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -31,7 +40,7 @@ def register():
             or_(User.username == form.username.data, User.email == form.email.data)
         ).first()
         if existing:
-            flash("Username or email already exists.", "danger")
+            flash(_("Username or email already exists."), "danger")
             return render_template("register.html", form=form)
 
         user = User(username=form.username.data.strip(), email=form.email.data.strip().lower())
@@ -39,7 +48,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash("Account created. Please log in.", "success")
+        flash(_("Account created. Please log in."), "success")
         return redirect(url_for("auth.login"))
 
     return render_template("register.html", form=form)
@@ -53,7 +62,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.strip()).first()
         if not user or not user.check_password(form.password.data):
-            flash("Invalid username or password.", "danger")
+            flash(_("Invalid username or password."), "danger")
             return render_template("login.html", form=form)
 
         # MFA flow
@@ -90,7 +99,7 @@ def mfa_verify():
             session.pop("pre_2fa_user_id", None)
             session.pop("remember_me", None)
             return redirect(url_for("auth.dashboard"))
-        flash("Invalid code. Try again.", "danger")
+        flash(_("Invalid code. Try again."), "danger")
 
     return render_template("mfa_verify.html", form=form, username=user.username)
 
@@ -110,7 +119,7 @@ def forgot_password():
             reset_url = current_app.config["APP_URL"].rstrip("/") + url_for("auth.reset_password", token=token)
             send_reset_email(to_email=user.email, reset_url=reset_url)
 
-        flash("If that email exists, a reset link has been sent.", "info")
+        flash(_("If that email exists, a reset link has been sent."), "info")
         return redirect(url_for("auth.login"))
 
     return render_template("forgot_password.html", form=form)
@@ -122,19 +131,19 @@ def reset_password(token):
 
     user_id = verify_reset_token(token)
     if not user_id:
-        flash("This reset link is invalid or expired.", "danger")
+        flash(_("This reset link is invalid or expired."), "danger")
         return redirect(url_for("auth.forgot_password"))
 
     user = db.session.get(User, int(user_id))
     if not user:
-        flash("This reset link is invalid.", "danger")
+        flash(_("This reset link is invalid."), "danger")
         return redirect(url_for("auth.forgot_password"))
 
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash("Password updated. You can log in now.", "success")
+        flash(_("Password updated. You can log in now."), "success")
         return redirect(url_for("auth.login"))
 
     return render_template("reset_password.html", form=form)
@@ -145,12 +154,12 @@ def change_password():
     form = ChangePasswordForm()
     if form.validate_on_submit():
         if not current_user.check_password(form.current_password.data):
-            flash("Current password is incorrect.", "danger")
+            flash(_("Current password is incorrect."), "danger")
             return render_template("change_password.html", form=form)
 
         current_user.set_password(form.new_password.data)
         db.session.commit()
-        flash("Password updated.", "success")
+        flash(_("Password updated."), "success")
         return redirect(url_for("auth.dashboard"))
 
     return render_template("change_password.html", form=form)
@@ -172,9 +181,9 @@ def enable_mfa():
         if verify_token(current_user.mfa_secret, token):
             current_user.mfa_enabled = True
             db.session.commit()
-            flash("MFA enabled!", "success")
+            flash(_("MFA enabled!"), "success")
             return redirect(url_for("auth.dashboard"))
-        flash("Invalid code. Make sure you scanned the QR and try again.", "danger")
+        flash(_("Invalid code. Make sure you scanned the QR and try again."), "danger")
 
     return render_template("enable_mfa.html", form=form, qr_data_uri=qr, uri=uri, mfa_enabled=current_user.mfa_enabled)
 
@@ -189,5 +198,5 @@ def dashboard():
 @login_required
 def logout():
     logout_user()
-    flash("Logged out.", "info")
+    flash(_("Logged out."), "info")
     return redirect(url_for("auth.login"))
