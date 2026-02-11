@@ -4,6 +4,7 @@ A small demo webapp (Pinterest-ish grid) to showcase:
 - Register / Login / Forgot password
 - Password change
 - MFA (TOTP / Google Authenticator)
+- **Multilingual Support (English & Catalan)** 🌐
 - Dashboard + logout
 
 ## Quick start
@@ -34,8 +35,21 @@ To configure real SMTP, copy `.env.example` to `.env` and edit values.
 
 > Tip: For tutorials, you can keep SMTP disabled and just use the console link.
 
+## Multilingual Support 🌐
+
+The application supports **English** and **Catalan**. Users can switch languages using the globe icon (🌐) in the navigation bar.
+
+- All UI strings are translatable
+- Language preference is stored in the user session
+- Browser language is used as fallback
+- Full Catalan translation included
+
+For more details on adding translations or supporting new languages, see [MULTILINGUAL.md](MULTILINGUAL.md).
+
 ## Notes
 
 - Passwords are hashed with Werkzeug.
 - MFA uses TOTP (RFC 6238) via `pyotp`.
 - CSRF protection is enabled via Flask-WTF.
+- Translations managed with Flask-Babel.
+
