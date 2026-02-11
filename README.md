@@ -26,6 +26,37 @@ Then open: http://127.0.0.1:5000
 
 The SQLite database will be created automatically in `instance/app.db`.
 
+## Makefile
+
+The project includes a `Makefile` with convenient targets. By default the Makefile will use the project's virtual environment Python at `.venv/bin/python` if it exists, otherwise it falls back to the system `python`.
+
+Common targets:
+
+- Compile translations:
+
+```bash
+make compile-language
+```
+
+- Remove compiled Python artefacts (`__pycache__`, `.pyc`):
+
+```bash
+make clean
+```
+
+- Serve the application (runs `python run.py`):
+
+```bash
+make serve
+```
+
+You can override the Python binary used by the Makefile with the `PYTHON` environment variable, for example:
+
+```bash
+PYTHON=python3.11 make compile-language
+```
+
+
 ## Email (Forgot Password)
 
 This project includes a **placeholder** mail configuration. If you don't configure mail,
