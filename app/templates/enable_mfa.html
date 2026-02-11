@@ -1,29 +1,29 @@
 {% extends "base.html" %}
-{% set title = "Activate MFA" %}
+{% set title = _("Activate MFA") %}
 {% block content %}
   <div class="row justify-content-center">
     <div class="col-lg-8">
       <div class="pv-card p-4">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-          <h2 class="h4 mb-0">Activate MFA (Google Authenticator)</h2>
+          <h2 class="h4 mb-0">{{ _("Activate MFA (Google Authenticator)") }}</h2>
           {% if mfa_enabled %}
-            <span class="badge text-bg-success rounded-pill">Enabled</span>
+            <span class="badge text-bg-success rounded-pill">{{ _("Enabled") }}</span>
           {% else %}
-            <span class="badge text-bg-warning rounded-pill">Not enabled yet</span>
+            <span class="badge text-bg-warning rounded-pill">{{ _("Not enabled yet") }}</span>
           {% endif %}
         </div>
 
         <div class="row mt-3 g-4">
           <div class="col-md-5">
-            <p class="text-white-50 small mb-2">1) Scan this QR code</p>
+            <p class="text-white-50 small mb-2">{{ _("1) Scan this QR code") }}</p>
             <img src="{{ qr_data_uri }}" alt="MFA QR code" class="img-fluid rounded" style="border:1px solid rgba(255,255,255,.1);" />
             <p class="text-white-50 small mt-2 mb-0">
-              If you can't scan, you can use this URI:
+              {{ _("If you can't scan, you can use this URI:") }}
             </p>
             <code class="small d-block text-break">{{ uri }}</code>
           </div>
           <div class="col-md-7">
-            <p class="text-white-50 small mb-2">2) Enter the 6-digit code to confirm</p>
+            <p class="text-white-50 small mb-2">{{ _("2) Enter the 6-digit code to confirm") }}</p>
 
             <form method="post" novalidate>
               {{ form.hidden_tag() }}
@@ -33,13 +33,12 @@
                 {% for e in form.token.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
               </div>
               {{ form.submit(class="btn btn-primary") }}
-              <a class="btn btn-outline-light ms-2" href="{{ url_for('auth.dashboard') }}">Back</a>
+              <a class="btn btn-outline-light ms-2" href="{{ url_for('auth.dashboard') }}">{{ _("Back") }}</a>
             </form>
 
             <hr class="border-white-50 opacity-25">
             <p class="small text-white-50 mb-0">
-              Demo note: this page allows re-seeding the secret if you clear the DB / user record.
-              For a production app you'd handle recovery codes, device changes, and lockouts.
+              {{ _("Demo note: this page allows re-seeding the secret if you clear the DB / user record. For a production app you'd handle recovery codes, device changes, and lockouts.") }}
             </p>
           </div>
         </div>
