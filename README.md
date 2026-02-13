@@ -56,6 +56,14 @@ You can override the Python binary used by the Makefile with the `PYTHON` enviro
 PYTHON=python3.11 make compile-language
 ```
 
+- Detect new/untranslated strings (extracts POT and reports untranslated msgids):
+
+```bash
+make detect-new
+```
+
+This target runs `pybabel extract` to refresh `app/translations/messages.pot` and then scans each locale's `messages.po` to report untranslated entries and examples.
+
 
 ## Email (Forgot Password)
 
