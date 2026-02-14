@@ -9,25 +9,25 @@
           {{ form.hidden_tag() }}
 
           <div class="mb-3">
-            {{ form.username.label(class="form-label") }}
+            <label for="{{ form.username.id }}">{{ _("Username") }}</label>
             {{ form.username(class="form-control", autocomplete="username") }}
             {% for e in form.username.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
           </div>
 
           <div class="mb-3">
-            {{ form.email.label(class="form-label") }}
+            <label for="{{ form.email.id }}">{{ _("Email") }}</label>
             {{ form.email(class="form-control", autocomplete="email") }}
             {% for e in form.email.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
           </div>
 
           <div class="mb-3">
-            {{ form.password.label(class="form-label") }}
+            <label for="{{ form.password.id }}">{{ _("Password") }}</label>
             {{ form.password(class="form-control", autocomplete="new-password") }}
             {% for e in form.password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
           </div>
 
           <div class="mb-3">
-            {{ form.password2.label(class="form-label") }}
+            <label for="{{ form.password2.id }}">{{ _("Confirm Password") }}</label>
             {{ form.password2(class="form-control", autocomplete="new-password") }}
             {% for e in form.password2.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
           </div>

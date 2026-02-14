@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-10 19:11-0800\n"
+"POT-Creation-Date: 2026-02-13 17:24-0800\n"
 "PO-Revision-Date: 2026-02-10 19:11-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ca\n"
@@ -17,6 +17,58 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+
+#: app/routes.py:43
+msgid "Username or email already exists."
+msgstr "El nom d'usuari o el correu electrònic ja existeix."
+
+#: app/routes.py:51
+msgid "Account created. Please log in."
+msgstr "Compte creat. Si us plau, inicia sessió."
+
+#: app/routes.py:65
+msgid "Invalid username or password."
+msgstr "Nom d'usuari o contrasenya invàlids."
+
+#: app/routes.py:102
+msgid "Invalid code. Try again."
+msgstr "Codi invàlid. Torna-ho a intentar."
+
+#: app/routes.py:122
+msgid "If that email exists, a reset link has been sent."
+msgstr "Si aquest correu existeix, s'ha enviat un enllaç de restabliment."
+
+#: app/routes.py:134
+msgid "This reset link is invalid or expired."
+msgstr "Aquest enllaç de restabliment és invàlid o ha expirat."
+
+#: app/routes.py:139
+msgid "This reset link is invalid."
+msgstr "Aquest enllaç de restabliment és invàlid."
+
+#: app/routes.py:146
+msgid "Password updated. You can log in now."
+msgstr "Contrasenya actualitzada. Ja pots iniciar sessió."
+
+#: app/routes.py:157
+msgid "Current password is incorrect."
+msgstr "La contrasenya actual és incorrecta."
+
+#: app/routes.py:162
+msgid "Password updated."
+msgstr "Contrasenya actualitzada."
+
+#: app/routes.py:184
+msgid "MFA enabled!"
+msgstr "MFA activat!"
+
+#: app/routes.py:186
+msgid "Invalid code. Make sure you scanned the QR and try again."
+msgstr "Codi invàlid. Assegura't d'haver escanejat el QR i torna-ho a intentar."
+
+#: app/routes.py:201
+msgid "Logged out."
+msgstr "Sessió tancada."
 
 #: app/templates/base.html:6
 msgid "Píndola Vermella Demo"
@@ -48,6 +100,18 @@ msgstr "Inici de sessió"
 msgid "Change password"
 msgstr "Canviar contrasenya"
 
+#: app/templates/change_password.html:12
+msgid "Current password"
+msgstr "Contrasenya actual"
+
+#: app/templates/change_password.html:18 app/templates/reset_password.html:12
+msgid "New password"
+msgstr "Nova contrasenya"
+
+#: app/templates/change_password.html:24 app/templates/reset_password.html:18
+msgid "Confirm new password"
+msgstr "Confirma la nova contrasenya"
+
 #: app/templates/dashboard.html:2 app/templates/dashboard.html:7
 msgid "Dashboard"
 msgstr "Tauler"
@@ -62,11 +126,11 @@ msgstr "MFA:"
 
 #: app/templates/dashboard.html:11
 msgid "enabled"
-msgstr "activada"
+msgstr "activat"
 
 #: app/templates/dashboard.html:11
 msgid "disabled"
-msgstr "desactivada"
+msgstr "desactivat"
 
 #: app/templates/enable_mfa.html:8
 msgid "Activate MFA (Google Authenticator)"
@@ -74,11 +138,11 @@ msgstr "Activar MFA (Google Authenticator)"
 
 #: app/templates/enable_mfa.html:10
 msgid "Enabled"
-msgstr "Activada"
+msgstr "Activat"
 
 #: app/templates/enable_mfa.html:12
 msgid "Not enabled yet"
-msgstr "Encara no està activada"
+msgstr "Encara no està activat"
 
 #: app/templates/enable_mfa.html:18
 msgid "1) Scan this QR code"
@@ -120,10 +184,26 @@ msgstr ""
 "restabliment (la demostració imprimeix a la consola si no està configurat"
 " SMTP)."
 
-#: app/templates/forgot_password.html:24 app/templates/mfa_verify.html:25
+#: app/templates/forgot_password.html:15 app/templates/register.html:18
+msgid "Email"
+msgstr "Correu electrònic"
+
+#: app/templates/forgot_password.html:25 app/templates/mfa_verify.html:25
 #: app/templates/register.html:39
 msgid "Back to login"
 msgstr "Tornar a l'inici de sessió"
+
+#: app/templates/login.html:12 app/templates/register.html:12
+msgid "Username"
+msgstr "Nom d'usuari"
+
+#: app/templates/login.html:18 app/templates/register.html:24
+msgid "Password"
+msgstr "Contrasenya"
+
+#: app/templates/login.html:24
+msgid "Remember me"
+msgstr "Recorda'm"
 
 #: app/templates/login.html:32
 msgid "Create account"
@@ -144,6 +224,10 @@ msgstr "Introdueix el codi de 6 dígits de Google Authenticator per a"
 #: app/templates/register.html:2 app/templates/register.html:7
 msgid "Register"
 msgstr "Registre"
+
+#: app/templates/register.html:30
+msgid "Confirm Password"
+msgstr "Confirma la nova contrasenya"
 
 #: app/templates/reset_password.html:2 app/templates/reset_password.html:7
 msgid "Reset password"

@@ -152,6 +152,7 @@ def reset_password(token):
 @login_required
 def change_password():
     form = ChangePasswordForm()
+    form.submit.label.text = _("Change password")
     if form.validate_on_submit():
         if not current_user.check_password(form.current_password.data):
             flash(_("Current password is incorrect."), "danger")
