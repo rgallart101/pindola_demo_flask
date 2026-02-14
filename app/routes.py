@@ -27,7 +27,7 @@ def set_locale(locale):
     if locale in ['en', 'ca']:
         session.permanent = True
         session['locale'] = locale
-    return redirect(request.referrer or url_for("auth.home"))
+    return redirect(url_for("auth.home"))
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -59,6 +59,7 @@ def login():
         return redirect(url_for("auth.dashboard"))
 
     form = LoginForm()
+    form.submit.label.text = _("Log in")
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.strip()).first()
         if not user or not user.check_password(form.password.data):
@@ -152,6 +153,7 @@ def reset_password(token):
 @login_required
 def change_password():
     form = ChangePasswordForm()
+    form.submit.label.text = _("Change password")
     if form.validate_on_submit():
         if not current_user.check_password(form.current_password.data):
             flash(_("Current password is incorrect."), "danger")
@@ -176,6 +178,7 @@ def enable_mfa():
     qr = qr_code_data_uri(uri)
 
     form = MFATokenForm()
+    form.submit.label.text = _("Verify token")
     if form.validate_on_submit():
         token = form.token.data.strip()
         if verify_token(current_user.mfa_secret, token):

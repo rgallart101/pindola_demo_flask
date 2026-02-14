@@ -56,6 +56,14 @@ You can override the Python binary used by the Makefile with the `PYTHON` enviro
 PYTHON=python3.11 make compile-language
 ```
 
+- Detect new/untranslated strings (extracts POT and reports untranslated msgids):
+
+```bash
+make detect-new
+```
+
+This target runs `pybabel extract` to refresh `app/translations/messages.pot` and then scans each locale's `messages.po` to report untranslated entries and examples.
+
 
 ## Email (Forgot Password)
 
@@ -76,6 +84,13 @@ The application supports **English** and **Catalan**. Users can switch languages
 - Full Catalan translation included
 
 For more details on adding translations or supporting new languages, see [MULTILINGUAL.md](MULTILINGUAL.md).
+
+## Development: FLASK_DEBUG
+
+- **Variable**: FLASK_DEBUG — Enables Flask's debug mode; set in [.env](.env).
+- **How to set**: add `FLASK_DEBUG=1` (or `true`) in `.env`; the app reads it via [app/config.py](app/config.py) and `run.py` uses it to set Flask's `debug` flag.
+- **Run**: start the app with `python run.py` or `make serve` to pick up the flag from `.env`.
+- **Warning**: Only enable `FLASK_DEBUG` in development. Do NOT set it to `1`/`true` in production — the interactive debugger can execute code and expose sensitive data.
 
 ## Notes
 

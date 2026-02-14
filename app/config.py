@@ -8,6 +8,8 @@ class Config:
     def __init__(self):
         self.SECRET_KEY = os.getenv("FLASK_SECRET_KEY", "dev-secret-change-me")
 
+        self.DEBUG_MODE = os.getenv("FLASK_DEBUG", "0").lower() in ("1", "true", "yes", "y")
+
         # Put DB inside instance/ by default
         db_dir = os.getenv("FLASK_DB_DIR", None)
         if db_dir:
