@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-13 17:27-0800\n"
+"POT-Creation-Date: 2026-02-13 17:48-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,47 +25,60 @@ msgstr ""
 msgid "Account created. Please log in."
 msgstr ""
 
-#: app/routes.py:65
+#: app/routes.py:62
+msgid "Log in"
+msgstr ""
+
+#: app/routes.py:66
 msgid "Invalid username or password."
 msgstr ""
 
-#: app/routes.py:102
+#: app/routes.py:103
 msgid "Invalid code. Try again."
 msgstr ""
 
-#: app/routes.py:122
+#: app/routes.py:123
 msgid "If that email exists, a reset link has been sent."
 msgstr ""
 
-#: app/routes.py:134
+#: app/routes.py:135
 msgid "This reset link is invalid or expired."
 msgstr ""
 
-#: app/routes.py:139
+#: app/routes.py:140
 msgid "This reset link is invalid."
 msgstr ""
 
-#: app/routes.py:146
+#: app/routes.py:147
 msgid "Password updated. You can log in now."
 msgstr ""
 
-#: app/routes.py:157
+#: app/routes.py:156 app/templates/change_password.html:2
+#: app/templates/change_password.html:7
+msgid "Change password"
+msgstr ""
+
+#: app/routes.py:159
 msgid "Current password is incorrect."
 msgstr ""
 
-#: app/routes.py:162
+#: app/routes.py:164
 msgid "Password updated."
 msgstr ""
 
-#: app/routes.py:184
+#: app/routes.py:181
+msgid "Verify token"
+msgstr ""
+
+#: app/routes.py:187
 msgid "MFA enabled!"
 msgstr ""
 
-#: app/routes.py:186
+#: app/routes.py:189
 msgid "Invalid code. Make sure you scanned the QR and try again."
 msgstr ""
 
-#: app/routes.py:201
+#: app/routes.py:204
 msgid "Logged out."
 msgstr ""
 
@@ -93,10 +106,6 @@ msgstr ""
 #: app/templates/base.html:33 app/templates/login.html:2
 #: app/templates/login.html:7
 msgid "Login"
-msgstr ""
-
-#: app/templates/change_password.html:2 app/templates/change_password.html:7
-msgid "Change password"
 msgstr ""
 
 #: app/templates/change_password.html:12
